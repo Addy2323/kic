@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { ArrowUpRight, Menu, X, Globe, Mail, MapPin } from 'lucide-react'
@@ -236,17 +237,56 @@ export function PageFrame({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function PageHero({ eyebrow, title, intro }: { eyebrow: string; title: string; intro: string }) {
+export function PageHero({
+  eyebrow,
+  title,
+  intro,
+  bgImage,
+}: {
+  eyebrow: string
+  title: string
+  intro: string
+  bgImage?: string
+}) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#082216] to-primary px-6 pb-20 pt-40 text-primary-foreground lg:px-10 lg:pb-28">
-      {/* Subtle top ambient glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(197,160,89,0.12),transparent_70%)] pointer-events-none" />
-      <div className="relative z-10 mx-auto max-w-7xl">
-        <p className="eyebrow mb-8 text-accent font-semibold tracking-[0.25em]">{eyebrow}</p>
-        <h1 className="max-w-5xl text-balance text-5xl font-medium leading-[.98] tracking-[-.055em] sm:text-7xl lg:text-[7rem] drop-shadow-xs">
+    <section className="relative flex min-h-[62vh] items-end overflow-hidden bg-[#061e13] px-6 pb-20 pt-40 text-primary-foreground lg:px-10 lg:pb-28 lg:pt-48">
+      {/* Background Image & Dual Gradient Overlays */}
+      {bgImage && (
+        <div className="absolute inset-0">
+          <Image
+            src={bgImage}
+            alt={title}
+            fill
+            priority
+            className="object-cover object-[center_35%]"
+            sizes="100vw"
+          />
+          {/* Left-to-Right Smooth Deep-Green Gradient Overlay for Text Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#051a10] via-[#051a10]/85 via-50% to-[#051a10]/25" />
+          
+          {/* Top & Bottom Depth Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#051a10] via-transparent to-[#051a10]/60" />
+          
+          {/* Subtle Multiply Tint */}
+          <div className="absolute inset-0 bg-[#072417]/35 mix-blend-multiply" />
+        </div>
+      )}
+
+      {/* Ambient glow when no background image */}
+      {!bgImage && (
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(197,160,89,0.12),transparent_70%)] pointer-events-none" />
+      )}
+
+      {/* Hero Content */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-accent backdrop-blur-md">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+          {eyebrow}
+        </div>
+        <h1 className="max-w-5xl text-balance text-5xl font-medium leading-[.98] tracking-[-.055em] text-primary-foreground drop-shadow-sm sm:text-7xl lg:text-[7.2rem]">
           {title}
         </h1>
-        <p className="mt-10 max-w-xl text-lg leading-relaxed text-primary-foreground/80">
+        <p className="mt-10 max-w-xl text-lg leading-relaxed text-primary-foreground/85 drop-shadow-xs">
           {intro}
         </p>
       </div>

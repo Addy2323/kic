@@ -1,4 +1,32 @@
 import { PageFrame, PageHero } from '@/components/site-shell'
 import { esgThemes } from '@/lib/content'
 export const metadata = { title: 'Sustainability | KIC Ltd', description: 'KIC Ltd sustainability and responsible investment principles.' }
-export default function SustainabilityPage() { return <PageFrame><PageHero eyebrow="Responsible growth" title="Prosperity that lasts." intro="Sustainability is not a separate workstream. It is the lens through which we evaluate opportunity, execution and impact." /><section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36"><div className="grid border-t border-border md:grid-cols-3">{esgThemes.map((theme, index) => <article key={theme.title} className="border-b border-border p-8 md:border-r md:last:border-r-0"><span className="text-sm text-accent">0{index + 1}</span><h2 className="mt-20 text-3xl font-medium tracking-tight">{theme.title}</h2><p className="mt-5 leading-relaxed text-muted-foreground">{theme.text}</p></article>)}</div><p className="mt-20 max-w-2xl border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground">We publish verified information as it becomes available. No impact metrics or claims are presented here without an appropriate source.</p></section></PageFrame> }
+export default function SustainabilityPage() {
+  return (
+    <PageFrame>
+      <PageHero
+        eyebrow="Responsible growth"
+        title="Prosperity that lasts."
+        intro="Sustainability is not a separate workstream. It is the lens through which we evaluate opportunity, execution and impact."
+        bgImage="/images/sustainability-hero.jpg"
+      />
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-36">
+        <div className="grid border-t border-border md:grid-cols-3">
+          {esgThemes.map((theme, index) => (
+            <article
+              key={theme.title}
+              className="border-b border-border p-8 md:border-r md:last:border-r-0 transition-colors hover:bg-secondary/40"
+            >
+              <span className="text-sm font-mono text-accent">0{index + 1}</span>
+              <h2 className="mt-20 text-3xl font-medium tracking-tight">{theme.title}</h2>
+              <p className="mt-5 leading-relaxed text-muted-foreground">{theme.text}</p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-20 max-w-2xl border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground">
+          We publish verified information as it becomes available. No impact metrics or claims are presented here without an appropriate source.
+        </p>
+      </section>
+    </PageFrame>
+  )
+}
