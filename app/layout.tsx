@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import { Geist, Source_Serif_4 } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
+import { StartupLoader } from '@/components/startup-loader'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
@@ -15,5 +16,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { colorScheme: 'light', themeColor: '#304d3f' }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" data-scroll-behavior="smooth" className="bg-background"><body className={`${geist.variable} ${sourceSerif.variable} antialiased`}>{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return (
+    <html lang="en" data-scroll-behavior="smooth" className="bg-background">
+      <body className={`${geist.variable} ${sourceSerif.variable} antialiased`}>
+        <StartupLoader />
+        {children}
+        {process.env.NODE_ENV === 'production' && <Analytics />}
+      </body>
+    </html>
+  )
 }

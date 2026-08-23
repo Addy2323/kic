@@ -3,14 +3,17 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { ArrowUpRight, Menu, X, Globe, Mail, MapPin } from 'lucide-react'
-import { company, navItems } from '@/lib/content'
+import { useState, useEffect, useRef } from 'react'
+import { ArrowUpRight, Menu, X, Globe, Mail, MapPin, ChevronDown, ChevronRight, Sparkles } from 'lucide-react'
+import { company, navItems, type NavItem } from '@/lib/content'
 
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null)
   const pathname = usePathname()
+  const leaveTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,25 +23,71 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
+  // Close mobile drawer and dropdown on route change
   useEffect(() => {
     setOpen(false)
+    setActiveDropdown(null)
+    setExpandedMobile(null)
   }, [pathname])
 
+  // Prevent body scrolling when mobile drawer is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
+  // Handle ESC key to close active dropdown
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveDropdown(null)
+        setOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  const handleMouseEnter = (label: string) => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current)
+      leaveTimerRef.current = null
+    }
+    setActiveDropdown(label)
+  }
+
+  const handleMouseLeave = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current)
+    }
+    leaveTimerRef.current = setTimeout(() => {
+      setActiveDropdown(null)
+    }, 180)
+  }
+
+  const toggleMobileAccordion = (label: string) => {
+    setExpandedMobile((prev) => (prev === label ? null : label))
+  }
+
   return (
-    <header 
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? 'border-b border-border/70 bg-background/90 shadow-sm backdrop-blur-xl py-3' 
-          : 'border-b border-border/40 bg-background/75 backdrop-blur-md py-4'
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'border-b border-border/80 bg-background/90 shadow-md backdrop-blur-xl py-2.5 sm:py-3'
+          : 'border-b border-border/40 bg-background/80 backdrop-blur-md py-4 sm:py-5'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        
         {/* Brand Logo & Identifier */}
-        <Link 
-          href="/" 
-          className="group flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" 
+        <Link
+          href="/"
+          className="group flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-sm"
           aria-label="KIC Ltd Home"
         >
           <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-gradient-to-br from-[#0c3120] to-[#05180f] text-white shadow-xs ring-1 ring-white/10 transition-all duration-300 group-hover:scale-105 group-hover:ring-accent/50">
@@ -56,48 +105,151 @@ export function Header() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden items-center gap-1 xl:gap-2 lg:flex" aria-label="Main navigation">
+        {/* Desktop Navigation Links with Dropdowns */}
+        <nav
+          className="hidden items-center gap-1 xl:gap-2 lg:flex"
+          aria-label="Main navigation"
+          onMouseLeave={handleMouseLeave}
+        >
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            const hasChildren = Boolean(item.children && item.children.length > 0)
+            const isDropdownOpen = activeDropdown === item.label
+            const isParentActive =
+              pathname === item.href ||
+              (item.href !== '/' && pathname.startsWith(item.href))
+
+            if (!hasChildren) {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`relative px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-200 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    isParentActive
+                      ? 'text-accent font-bold'
+                      : 'text-foreground/75 hover:text-foreground hover:bg-foreground/5'
+                  }`}
+                >
+                  {item.label}
+                  {isParentActive && (
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] rounded-full bg-accent animate-in fade-in zoom-in duration-300" />
+                  )}
+                </Link>
+              )
+            }
+
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-200 rounded-xs ${
-                  isActive
-                    ? 'text-accent font-bold'
-                    : 'text-foreground/75 hover:text-foreground hover:bg-foreground/5'
-                }`}
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(item.label)}
               >
-                {item.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] rounded-full bg-accent animate-in fade-in zoom-in duration-300" />
+                <button
+                  type="button"
+                  aria-expanded={isDropdownOpen}
+                  aria-haspopup="menu"
+                  aria-controls={`dropdown-${item.label}`}
+                  onClick={() =>
+                    setActiveDropdown(isDropdownOpen ? null : item.label)
+                  }
+                  onFocus={() => handleMouseEnter(item.label)}
+                  className={`group flex items-center gap-1 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.16em] transition-all duration-200 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                    isParentActive || isDropdownOpen
+                      ? 'text-accent font-bold bg-accent/5'
+                      : 'text-foreground/75 hover:text-foreground hover:bg-foreground/5'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-200 ${
+                      isDropdownOpen ? 'rotate-180 text-accent' : 'text-muted-foreground/70 group-hover:text-foreground'
+                    }`}
+                  />
+                  {isParentActive && !isDropdownOpen && (
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-[2px] rounded-full bg-accent animate-in fade-in zoom-in duration-300" />
+                  )}
+                </button>
+
+                {/* Dropdown Floating Panel */}
+                {isDropdownOpen && (
+                  <div
+                    id={`dropdown-${item.label}`}
+                    role="menu"
+                    onMouseEnter={() => handleMouseEnter(item.label)}
+                    onMouseLeave={handleMouseLeave}
+                    className="absolute left-1/2 top-full mt-2 -translate-x-1/2 z-50 w-[540px] max-w-[90vw] origin-top rounded-2xl border border-accent/20 bg-[#061e13]/95 p-5 text-white shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-2 duration-200"
+                  >
+                    {/* Header bar in dropdown */}
+                    <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
+                      <div>
+                        <Link
+                          href={item.href}
+                          className="group/main inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent hover:text-white transition-colors"
+                        >
+                          <span>{item.label} Overview</span>
+                          <ArrowUpRight size={13} className="transition-transform group-hover/main:translate-x-0.5 group-hover/main:-translate-y-0.5" />
+                        </Link>
+                        {item.description && (
+                          <p className="mt-1 text-[11px] text-white/65 leading-snug">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Sub-items grid */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {item.children?.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          role="menuitem"
+                          onClick={() => setActiveDropdown(null)}
+                          className="group/item flex flex-col rounded-xl p-2.5 transition-all duration-150 hover:bg-white/10 hover:ring-1 hover:ring-accent/40"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium tracking-wide text-white group-hover/item:text-accent transition-colors">
+                              {sub.label}
+                            </span>
+                            <ChevronRight
+                              size={12}
+                              className="text-white/40 opacity-0 -translate-x-1 transition-all group-hover/item:opacity-100 group-hover/item:translate-x-0 group-hover/item:text-accent"
+                            />
+                          </div>
+                          {sub.description && (
+                            <span className="mt-0.5 text-[10.5px] leading-tight text-white/60 group-hover/item:text-white/80 transition-colors">
+                              {sub.description}
+                            </span>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
-              </Link>
+              </div>
             )
           })}
         </nav>
 
-        {/* Desktop Right Action Area */}
+        {/* Desktop Right Action Area: Tanzania Region & Standalone CTA */}
         <div className="hidden items-center gap-5 md:flex">
-          {/* Subtle Region Badge */}
-          <div className="hidden items-center gap-1.5 text-[11px] font-medium tracking-wider text-muted-foreground/75 xl:flex">
+          {/* Region Badge */}
+          <div className="hidden items-center gap-1.5 text-[11px] font-medium tracking-wider text-muted-foreground/85 xl:flex">
             <Globe size={13} className="text-accent" />
             <span>Tanzania · EA</span>
           </div>
 
           <div className="hidden h-4 w-px bg-border xl:block" />
 
-          {/* Premium CTA Button */}
+          {/* Standalone Primary CTA */}
           <Link
             href="/contact"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-primary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground shadow-sm transition-all duration-300 hover:bg-[#072417] hover:shadow-md hover:ring-1 hover:ring-accent/40 active:scale-[0.98]"
           >
             <span>Partner with us</span>
-            <ArrowUpRight 
-              size={15} 
-              className="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" 
+            <ArrowUpRight
+              size={15}
+              className="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
           </Link>
         </div>
@@ -106,55 +258,131 @@ export function Header() {
         <div className="flex items-center gap-3 lg:hidden">
           <Link
             href="/contact"
-            className="rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground sm:px-4"
+            className="rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground shadow-xs"
           >
             Partner
           </Link>
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-sm border border-border bg-background/80 text-foreground transition-colors hover:bg-secondary focus-visible:outline-none"
+            type="button"
+            className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-background/90 text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
             onClick={() => setOpen(!open)}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
-
       </div>
 
-      {/* Mobile Drawer / Navigation Overlay */}
+      {/* Mobile Navigation Full-Height Drawer Overlay */}
       {open && (
-        <div className="border-t border-border/80 bg-background/95 backdrop-blur-2xl px-6 py-8 shadow-2xl lg:hidden animate-in slide-in-from-top-2 duration-300">
-          <div className="mx-auto max-w-lg flex flex-col gap-6">
-            <p className="eyebrow text-[10px] text-muted-foreground/70">Navigation</p>
-            <nav className="flex flex-col divide-y divide-border/50">
+        <div className="fixed inset-0 top-[60px] z-50 flex flex-col bg-background/98 backdrop-blur-2xl lg:hidden animate-in fade-in duration-200">
+          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+            <div className="flex items-center justify-between border-b border-border/60 pb-3">
+              <span className="eyebrow text-[11px] text-muted-foreground">Directory & Navigation</span>
+              <div className="flex items-center gap-1.5 text-[11px] font-medium text-accent">
+                <Globe size={13} />
+                <span>Tanzania · EA</span>
+              </div>
+            </div>
+
+            {/* Mobile Accordion Nav */}
+            <nav className="flex flex-col divide-y divide-border/60">
               {navItems.map((item, idx) => {
-                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                const hasChildren = Boolean(item.children && item.children.length > 0)
+                const isExpanded = expandedMobile === item.label
+                const isParentActive =
+                  pathname === item.href ||
+                  (item.href !== '/' && pathname.startsWith(item.href))
+
+                if (!hasChildren) {
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={`flex items-center justify-between py-4 text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
+                        isParentActive
+                          ? 'text-accent font-bold pl-2 border-l-2 border-accent'
+                          : 'text-foreground/85 hover:text-foreground'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-xs text-muted-foreground font-mono">0{idx + 1}</span>
+                    </Link>
+                  )
+                }
+
                 return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    className={`flex items-center justify-between py-3.5 text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
-                      isActive ? 'text-accent font-bold pl-2 border-l-2 border-accent' : 'text-foreground/80 hover:text-foreground'
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    <span className="text-xs text-muted-foreground font-mono">0{idx + 1}</span>
-                  </Link>
+                  <div key={item.label} className="py-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileAccordion(item.label)}
+                      className={`flex w-full items-center justify-between py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
+                        isParentActive || isExpanded ? 'text-accent font-bold' : 'text-foreground/85'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>{item.label}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground font-mono">0{idx + 1}</span>
+                        <ChevronDown
+                          size={16}
+                          className={`transition-transform duration-200 ${
+                            isExpanded ? 'rotate-180 text-accent' : 'text-muted-foreground'
+                          }`}
+                        />
+                      </div>
+                    </button>
+
+                    {/* Accordion Expandable Content */}
+                    {isExpanded && (
+                      <div className="mb-3 space-y-1.5 rounded-xl border border-border/80 bg-secondary/40 p-3 animate-in slide-in-from-top-2 duration-200">
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider text-accent hover:bg-accent/10 transition-colors"
+                        >
+                          <span>{item.label} Overview</span>
+                          <ArrowUpRight size={13} />
+                        </Link>
+                        <div className="h-px bg-border/60 my-1" />
+                        {item.children?.map((sub) => (
+                          <Link
+                            key={sub.label}
+                            href={sub.href}
+                            onClick={() => setOpen(false)}
+                            className="flex flex-col rounded-lg px-3 py-2 text-foreground/80 hover:bg-background hover:text-accent transition-colors"
+                          >
+                            <span className="text-xs font-medium tracking-wide">
+                              {sub.label}
+                            </span>
+                            {sub.description && (
+                              <span className="text-[10px] text-muted-foreground leading-tight">
+                                {sub.description}
+                              </span>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 )
               })}
             </nav>
 
-            <div className="border-t border-border pt-6 flex flex-col gap-4">
+            {/* Mobile Bottom Quick Actions */}
+            <div className="border-t border-border pt-4 pb-12 flex flex-col gap-4">
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-sm bg-primary py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground shadow-md transition-colors hover:bg-[#072417]"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground shadow-md transition-colors hover:bg-[#072417]"
               >
                 <span>Partner with us</span>
                 <ArrowUpRight size={16} className="text-accent" />
               </Link>
-              <div className="flex items-center justify-between text-xs text-muted-foreground pt-2">
+              <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
                 <span>{company.email}</span>
                 <span>Iringa, Tanzania</span>
               </div>
