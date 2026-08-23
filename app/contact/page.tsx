@@ -119,7 +119,7 @@ export default function ContactPage() {
                   Thank You for Your Submission
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Your message has been received. A representative from Kigola International will contact you shortly.
+                  Your inquiry has been submitted and routed directly to <strong>{company.email}</strong>. A representative from Kigola International will contact you shortly.
                 </p>
                 <button
                   type="button"
@@ -131,17 +131,51 @@ export default function ContactPage() {
               </div>
             ) : (
               <form
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
                 className="mt-8 space-y-6"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault()
+                  const form = e.currentTarget
+                  const formData = new FormData(form)
+
+                  try {
+                    await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        name: formData.get('name'),
+                        company: formData.get('company'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        country: formData.get('country'),
+                        interest: formData.get('interest'),
+                        partnershipType: formData.get('partnershipType'),
+                        investment: formData.get('investment'),
+                        message: formData.get('message'),
+                        type: activeTab,
+                        recipient: company.email,
+                      }),
+                    })
+                  } catch (err) {
+                    console.error('Submission error:', err)
+                  }
+
                   setSubmitted(true)
                 }}
               >
+                {/* Hidden field for Netlify Forms */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="to_email" value={company.email} />
+
                 <div className="grid gap-6 sm:grid-cols-2">
                   <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Full Name / Contact Person *
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="e.g. Mendrad Kigola"
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
@@ -151,6 +185,7 @@ export default function ContactPage() {
                     Organization / Company *
                     <input
                       type="text"
+                      name="company"
                       required
                       placeholder="Organization Name"
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
@@ -163,6 +198,7 @@ export default function ContactPage() {
                     Email Address *
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder="name@company.com"
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
@@ -172,6 +208,7 @@ export default function ContactPage() {
                     Telephone / Phone Number
                     <input
                       type="tel"
+                      name="phone"
                       placeholder="+255..."
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                     />
@@ -183,6 +220,7 @@ export default function ContactPage() {
                     Country *
                     <input
                       type="text"
+                      name="country"
                       required
                       placeholder="e.g. Tanzania, UK, Kenya"
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
@@ -192,6 +230,7 @@ export default function ContactPage() {
                   <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     Area of Interest *
                     <select
+                      name="interest"
                       required
                       className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                     >
@@ -215,6 +254,7 @@ export default function ContactPage() {
                     <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       Partnership Type *
                       <select
+                        name="partnershipType"
                         required
                         className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                       >
@@ -233,6 +273,7 @@ export default function ContactPage() {
                       Estimated Investment / Value
                       <input
                         type="text"
+                        name="investment"
                         placeholder="e.g. $1M - $5M / USD"
                         className="mt-2 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent"
                       />
@@ -243,6 +284,7 @@ export default function ContactPage() {
                 <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {activeTab === 'partner' ? 'Proposed Partnership Summary *' : 'Message *'}
                   <textarea
+                    name="message"
                     required
                     rows={4}
                     placeholder={
