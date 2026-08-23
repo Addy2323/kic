@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { X, MessageCircle } from 'lucide-react'
+import { X } from 'lucide-react'
 
 // Official WhatsApp Vector Icon
 function WhatsAppIcon({ className = 'w-6 h-6' }: { className?: string }) {
@@ -59,26 +59,30 @@ export function WhatsAppWidget() {
   }, [isOpen])
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <>
       {/* WhatsApp Popup Card */}
       {isOpen && (
         <div
           ref={popupRef}
           role="dialog"
           aria-label="WhatsApp Support Popup"
-          className="mb-4 w-[340px] max-w-[calc(100vw-32px)] origin-bottom-right rounded-3xl border border-border/80 bg-white p-5 text-[#05180f] shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+          style={{ zIndex: 9999 }}
+          className="fixed bottom-24 right-5 sm:bottom-28 sm:right-7 w-[350px] max-w-[calc(100vw-32px)] rounded-3xl border border-border/90 bg-white p-5 text-[#05180f] shadow-[0_20px_60px_rgba(0,0,0,0.35)] animate-in fade-in zoom-in-95 duration-200"
         >
           {/* Header */}
           <div className="flex items-start justify-between border-b border-border/60 pb-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-sm">
+              <div
+                style={{ width: '44px', height: '44px', borderRadius: '50%' }}
+                className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#25D366] text-white shadow-sm"
+              >
                 <WhatsAppIcon className="h-6 w-6" />
               </div>
               <div className="flex flex-col">
                 <h3 className="text-sm font-bold text-[#05180f] tracking-tight">
                   KIC WhatsApp Support
                 </h3>
-                <div className="flex items-center gap-1.5 text-xs font-medium text-[#25D366]">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#25D366]">
                   <span className="h-2 w-2 rounded-full bg-[#25D366] animate-pulse" />
                   <span>Online &amp; Ready to Help</span>
                 </div>
@@ -88,7 +92,7 @@ export function WhatsAppWidget() {
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="rounded-full p-1 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+              className="rounded-full p-1.5 text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
               aria-label="Close popup"
             >
               <X size={18} />
@@ -98,13 +102,13 @@ export function WhatsAppWidget() {
           {/* Body Content */}
           <div className="mt-4 space-y-4">
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Have questions about factory sourcing, project development, renewable energy, healthcare, or partnership opportunities? Chat with our team directly.
+              Have questions about renewable energy, healthcare projects, agriculture, or partnership opportunities? Chat with our team directly.
             </p>
 
             {/* Number Pill Box */}
-            <div className="flex items-center justify-between rounded-xl bg-secondary/50 px-4 py-2.5 text-xs font-mono">
+            <div className="flex items-center justify-between rounded-xl bg-secondary/70 px-4 py-2.5 text-xs font-mono">
               <span className="text-muted-foreground font-sans font-medium">WhatsApp:</span>
-              <span className="font-bold text-[#25D366]">{phoneNumberDisplay}</span>
+              <span className="font-bold text-[#1fad53] text-sm">{phoneNumberDisplay}</span>
             </div>
 
             {/* Direct CTA Button */}
@@ -121,24 +125,41 @@ export function WhatsAppWidget() {
         </div>
       )}
 
-      {/* Floating Action WhatsApp Button */}
-      <button
-        ref={buttonRef}
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-expanded={isOpen}
-        aria-label="Chat with us on WhatsApp"
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#20ba5a] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 active:scale-95 sm:h-16 sm:w-16"
+      {/* Floating Action WhatsApp Circular Button */}
+      <div
+        style={{ zIndex: 9998 }}
+        className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7"
       >
-        {/* Subtle Pulse Ring */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366]/30 animate-ping duration-1000 -z-10 pointer-events-none" />
+        <button
+          ref={buttonRef}
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-expanded={isOpen}
+          aria-label="Chat with us on WhatsApp"
+          style={{
+            width: '62px',
+            height: '62px',
+            minWidth: '62px',
+            minHeight: '62px',
+            borderRadius: '50%',
+          }}
+          className="group relative flex aspect-square cursor-pointer items-center justify-center bg-[#25D366] text-white shadow-[0_8px_30px_rgba(37,211,102,0.45)] transition-all duration-300 hover:scale-105 hover:bg-[#20ba5a] hover:shadow-[0_12px_40px_rgba(37,211,102,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40 active:scale-95"
+        >
+          {/* Subtle Pulse Ring */}
+          {!isOpen && (
+            <span
+              style={{ borderRadius: '50%' }}
+              className="absolute -inset-1.5 bg-[#25D366]/35 animate-ping duration-1000 -z-10 pointer-events-none"
+            />
+          )}
 
-        {isOpen ? (
-          <X size={26} className="transition-transform duration-200 group-hover:rotate-90" />
-        ) : (
-          <WhatsAppIcon className="h-8 w-8 sm:h-9 sm:w-9" />
-        )}
-      </button>
-    </div>
+          {isOpen ? (
+            <X size={26} className="transition-transform duration-200 group-hover:rotate-90 text-white" />
+          ) : (
+            <WhatsAppIcon className="h-8 w-8 text-white" />
+          )}
+        </button>
+      </div>
+    </>
   )
 }
