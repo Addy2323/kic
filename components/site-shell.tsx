@@ -406,27 +406,6 @@ export function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) 
   )
 }
 
-export function WhatsAppFloatingButton() {
-  return (
-    <a
-      href={company.whatsappLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with KIC on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-xl transition-all duration-300 hover:bg-[#20ba5a] hover:scale-105 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] group"
-    >
-      <WhatsAppIcon className="h-6 w-6 fill-white" />
-      <span className="hidden sm:inline-block font-sans text-xs font-bold uppercase tracking-wider text-white">
-        WhatsApp Us
-      </span>
-      <span className="relative flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
-        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-white" />
-      </span>
-    </a>
-  )
-}
-
 export function Footer() {
   return (
     <footer className="border-t border-primary-foreground/10 bg-primary px-6 py-20 text-primary-foreground lg:px-10 lg:py-28">
@@ -453,25 +432,14 @@ export function Footer() {
 
           <div>
             <p className="eyebrow text-accent">Get in touch</p>
-            <div className="mt-5 space-y-4">
+            <div className="mt-5 space-y-3">
               <a 
-                className="inline-flex items-center gap-2.5 text-base text-primary-foreground/90 underline decoration-primary-foreground/30 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent" 
+                className="inline-flex items-center gap-2 text-lg text-primary-foreground/90 underline decoration-primary-foreground/30 underline-offset-8 transition-colors hover:text-accent hover:decoration-accent" 
                 href={`mailto:${company.email}`}
               >
                 <Mail size={16} className="text-accent" />
                 {company.email}
               </a>
-              <div>
-                <a 
-                  className="inline-flex items-center gap-2.5 text-base font-semibold text-primary-foreground/90 underline decoration-primary-foreground/30 underline-offset-8 transition-colors hover:text-[#25D366] hover:decoration-[#25D366]" 
-                  href={company.whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <WhatsAppIcon className="h-5 w-5 text-[#25D366]" />
-                  {company.phone}
-                </a>
-              </div>
             </div>
           </div>
 
@@ -505,7 +473,6 @@ export function PageFrame({ children }: { children: React.ReactNode }) {
       <Header />
       {children}
       <Footer />
-      <WhatsAppFloatingButton />
     </main>
   )
 }

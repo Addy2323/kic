@@ -132,16 +132,29 @@ export default function ContactPage() {
             ) : (
               <form
                 name="contact"
-                method="POST"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
                 className="mt-8 space-y-6"
                 onSubmit={async (e) => {
                   e.preventDefault()
                   const form = e.currentTarget
                   const formData = new FormData(form)
+                  formData.set('form-name', 'contact')
+                  formData.set('type', activeTab)
+                  formData.set('to_email', company.email)
 
                   try {
+                    // 1. Submit to Netlify Forms endpoint via URLSearchParams
+                    const urlParams = new URLSearchParams()
+                    formData.forEach((value, key) => {
+                      urlParams.append(key, value.toString())
+                    })
+
+                    await fetch('/', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                      body: urlParams.toString(),
+                    }).catch(() => {})
+
+                    // 2. Also submit to internal API route
                     await fetch('/api/contact', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
@@ -158,7 +171,7 @@ export default function ContactPage() {
                         type: activeTab,
                         recipient: company.email,
                       }),
-                    })
+                    }).catch(() => {})
                   } catch (err) {
                     console.error('Submission error:', err)
                   }
@@ -166,7 +179,7 @@ export default function ContactPage() {
                   setSubmitted(true)
                 }}
               >
-                {/* Hidden field for Netlify Forms */}
+                {/* Hidden field for Netlify Forms identification */}
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="to_email" value={company.email} />
 
