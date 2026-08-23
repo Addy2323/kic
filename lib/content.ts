@@ -12,6 +12,12 @@ export interface NavItem {
   children?: NavSubItem[]
 }
 
+export interface TeamMember {
+  name: string
+  role: string
+  category: 'Leadership' | 'Legal & HR' | 'Finance' | 'Marketing' | 'Technology'
+}
+
 export const company = {
   name: 'Kigola International Company Limited',
   shortName: 'KIC Ltd',
@@ -22,17 +28,25 @@ export const company = {
   email: 'info@kic.co.tz',
   location: ['Mufindi District', 'Iringa Region', 'United Republic of Tanzania'],
   founder: {
-    name: 'Mendrad Lutengano Kigola',
-    title: 'Founder & Director',
-    bio: 'Founding leader of Kigola International Company Limited, guiding long-term strategy, community-aligned asset development, and multi-sector investment across Tanzania and East Africa.',
+    name: 'Mendrad Kigola',
+    title: 'Managing Director',
+    bio: 'Managing Director and founding leader of Kigola International Company Limited, guiding long-term strategy, community-aligned asset development, and multi-sector investment across Tanzania and East Africa.',
   },
+  team: [
+    { name: 'Mendrad Kigola', role: 'Managing Director', category: 'Leadership' },
+    { name: 'Asteberta Myamba', role: 'Director', category: 'Leadership' },
+    { name: 'Irean Mendrad Kigola', role: 'Company HR Manager, Lawyer', category: 'Legal & HR' },
+    { name: 'Isaac Mendrad Kigola', role: 'Company Accountant', category: 'Finance' },
+    { name: 'Innocent Mendra Kigola', role: 'Company Marketing Manager', category: 'Marketing' },
+    { name: 'Ado Myamba', role: 'Company Information Technology Officer (ICT)', category: 'Technology' },
+  ] as TeamMember[],
   roles: [
-    'Founder & Director',
-    'Operations Manager',
-    'Finance Manager',
-    'Project Manager – Energy & Infrastructure',
-    'Project Manager – Healthcare & Agriculture',
-    'Company Secretary',
+    'Managing Director',
+    'Director',
+    'Company HR Manager & Lawyer',
+    'Company Accountant',
+    'Company Marketing Manager',
+    'Company IT Officer (ICT)',
   ],
 }
 

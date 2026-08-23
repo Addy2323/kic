@@ -157,11 +157,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Founder Profile Card */}
+          {/* Managing Director Highlight Card */}
           <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm lg:p-10">
             <div className="grid gap-8 md:grid-cols-[.4fr_1fr] md:items-center">
               <div className="flex h-36 w-36 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0c3120] to-[#05180f] text-accent text-3xl font-serif font-bold shadow-md">
-                MLK
+                MK
               </div>
               <div>
                 <span className="eyebrow text-accent font-semibold">
@@ -176,67 +176,78 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
-          {/* Corporate Functional Positions (CMS-ready) */}
-          <div className="mt-12">
-            <h3 className="text-xl font-serif font-medium text-foreground">
-              Management & Operational Architecture
-            </h3>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Functional departments structured for rigorous project execution.
-            </p>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {company.roles.map((role) => (
-                <div
-                  key={role}
-                  className="flex items-center gap-3 rounded-xl border border-border/80 bg-secondary/30 p-4"
-                >
-                  <Briefcase size={16} className="text-accent shrink-0" />
-                  <span className="text-xs font-semibold text-foreground">
-                    {role}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Section 4: Our Team Structure */}
+      {/* Section 4: Organizational Structure */}
       <section id="team" className="scroll-mt-24 border-b border-border/80 bg-secondary/30 px-6 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="eyebrow text-accent font-semibold">Organization</p>
             <h2 className="mt-3 text-3xl font-serif font-medium tracking-tight text-foreground sm:text-4xl">
-              The People Behind Our Vision
+              KIC Company Group — Organizational Structure
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              KIC brings together specialists across engineering, healthcare management, agronomy, finance, and community liaison.
+              Our executive leadership and operational management structure driving KIC’s investment and project execution across East Africa.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {[
-              { title: 'Leadership', desc: 'Board governance & executive direction' },
-              { title: 'Management', desc: 'Operational coordination & compliance' },
-              { title: 'Energy & Infrastructure', desc: 'Hydropower, civil works & EPC management' },
-              { title: 'Healthcare & Agriculture', desc: 'Hospital planning, farming & livestock' },
-              { title: 'Finance & Administration', desc: 'Project financing, accounting & administration' },
-            ].map((cat) => (
+          {/* Org Chart Cards Grid */}
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {company.team.map((member) => (
               <div
-                key={cat.title}
-                className="rounded-xl border border-border bg-card p-6 shadow-xs"
+                key={member.name}
+                className="group rounded-2xl border border-border bg-card p-6 shadow-xs transition-all hover:border-accent/40 hover:shadow-md"
               >
-                <UserCheck size={20} className="text-accent" />
-                <h3 className="mt-4 font-semibold text-foreground text-sm">
-                  {cat.title}
+                <div className="flex items-center justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 font-serif font-bold text-accent">
+                    {member.name
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')
+                      .slice(0, 2)}
+                  </div>
+                  <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold text-accent">
+                    {member.category}
+                  </span>
+                </div>
+                <h3 className="mt-5 font-serif text-xl font-medium text-foreground group-hover:text-accent transition-colors">
+                  {member.name}
                 </h3>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                  {cat.desc}
+                <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  {member.role}
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Table View */}
+          <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+            <div className="border-b border-border bg-secondary/50 px-6 py-4">
+              <h3 className="font-serif text-lg font-medium text-foreground">
+                KIC Company Group — Executive Directory
+              </h3>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm">
+                <thead className="border-b border-border bg-secondary/20 text-xs uppercase text-muted-foreground">
+                  <tr>
+                    <th className="px-6 py-3 font-semibold">Name</th>
+                    <th className="px-6 py-3 font-semibold">Official Role</th>
+                    <th className="px-6 py-3 font-semibold">Department / Category</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {company.team.map((m) => (
+                    <tr key={m.name} className="hover:bg-secondary/10 transition-colors">
+                      <td className="px-6 py-4 font-medium text-foreground">{m.name}</td>
+                      <td className="px-6 py-4 text-accent font-semibold">{m.role}</td>
+                      <td className="px-6 py-4 text-muted-foreground">{m.category}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
