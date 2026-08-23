@@ -39,7 +39,7 @@ export const company = {
   team: [
     { name: 'Mendrad Kigola', role: 'Managing Director', category: 'Leadership' },
     { name: 'Asteberta Myamba', role: 'Director', category: 'Leadership' },
-    { name: 'Irean Mendrad Kigola', role: 'Company HR Manager, Lawyer', category: 'Legal & HR' },
+    { name: 'Irene Mendrad Kigola', role: 'Company HR Manager, Lawyer', category: 'Legal & HR' },
     { name: 'Isaac Mendrad Kigola', role: 'Company Accountant', category: 'Finance' },
     { name: 'Innocent Mendra Kigola', role: 'Company Marketing Manager', category: 'Marketing' },
     { name: 'Ado Myamba', role: 'Company Information Technology Officer (ICT)', category: 'Technology' },
