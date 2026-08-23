@@ -2,6 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Geist, Source_Serif_4 } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 import { StartupLoader } from '@/components/startup-loader'
+import { WhatsAppWidget } from '@/components/whatsapp-widget'
 import './globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${geist.variable} ${sourceSerif.variable} antialiased`} suppressHydrationWarning>
         <StartupLoader />
         {children}
+        <WhatsAppWidget />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
