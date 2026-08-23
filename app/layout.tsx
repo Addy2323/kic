@@ -17,8 +17,8 @@ export const viewport: Viewport = { colorScheme: 'light', themeColor: '#304d3f' 
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className="bg-background">
-      <body className={`${geist.variable} ${sourceSerif.variable} antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className="bg-background" suppressHydrationWarning>
+      <body className={`${geist.variable} ${sourceSerif.variable} antialiased`} suppressHydrationWarning>
         <StartupLoader />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

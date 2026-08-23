@@ -78,7 +78,9 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
+        open
+          ? 'bg-[#faf8f3] text-[#05180f] shadow-2xl border-b border-border py-3.5'
+          : scrolled
           ? 'border-b border-border/80 bg-background/90 shadow-md backdrop-blur-xl py-2.5 sm:py-3'
           : 'border-b border-border/40 bg-background/80 backdrop-blur-md py-4 sm:py-5'
       }`}
@@ -274,20 +276,22 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation Full-Height Drawer Overlay */}
+      {/* Mobile Navigation Dropdown Content */}
       {open && (
-        <div className="fixed inset-0 top-[60px] z-50 flex flex-col bg-background/98 backdrop-blur-2xl lg:hidden animate-in fade-in duration-200">
-          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
-            <div className="flex items-center justify-between border-b border-border/60 pb-3">
-              <span className="eyebrow text-[11px] text-muted-foreground">Directory & Navigation</span>
-              <div className="flex items-center gap-1.5 text-[11px] font-medium text-accent">
+        <div className="mt-3.5 border-t border-border/80 bg-[#faf8f3] text-[#05180f] px-6 py-6 lg:hidden max-h-[calc(100vh-76px)] overflow-y-auto animate-in slide-in-from-top-2 duration-200">
+          <div className="flex flex-col space-y-6 max-w-lg mx-auto w-full pb-16">
+            <div className="flex items-center justify-between border-b border-[#05180f]/10 pb-3">
+              <span className="eyebrow text-[11px] text-[#05180f]/60 font-bold tracking-widest">
+                Directory & Navigation
+              </span>
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#8c6d23]">
                 <Globe size={13} />
                 <span>Tanzania · EA</span>
               </div>
             </div>
 
             {/* Mobile Accordion Nav */}
-            <nav className="flex flex-col divide-y divide-border/60">
+            <nav className="flex flex-col divide-y divide-[#05180f]/10">
               {navItems.map((item, idx) => {
                 const hasChildren = Boolean(item.children && item.children.length > 0)
                 const isExpanded = expandedMobile === item.label
@@ -303,12 +307,12 @@ export function Header() {
                       onClick={() => setOpen(false)}
                       className={`flex items-center justify-between py-4 text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
                         isParentActive
-                          ? 'text-accent font-bold pl-2 border-l-2 border-accent'
-                          : 'text-foreground/85 hover:text-foreground'
+                          ? 'text-[#8c6d23] font-bold pl-2 border-l-2 border-[#8c6d23]'
+                          : 'text-[#05180f] hover:text-[#8c6d23]'
                       }`}
                     >
                       <span>{item.label}</span>
-                      <span className="text-xs text-muted-foreground font-mono">0{idx + 1}</span>
+                      <span className="text-xs text-[#05180f]/50 font-mono">0{idx + 1}</span>
                     </Link>
                   )
                 }
@@ -319,18 +323,18 @@ export function Header() {
                       type="button"
                       onClick={() => toggleMobileAccordion(item.label)}
                       className={`flex w-full items-center justify-between py-3 text-sm font-semibold uppercase tracking-[0.18em] transition-colors ${
-                        isParentActive || isExpanded ? 'text-accent font-bold' : 'text-foreground/85'
+                        isParentActive || isExpanded ? 'text-[#8c6d23] font-bold' : 'text-[#05180f]'
                       }`}
                     >
                       <div className="flex items-center gap-2">
                         <span>{item.label}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground font-mono">0{idx + 1}</span>
+                        <span className="text-xs text-[#05180f]/50 font-mono">0{idx + 1}</span>
                         <ChevronDown
                           size={16}
                           className={`transition-transform duration-200 ${
-                            isExpanded ? 'rotate-180 text-accent' : 'text-muted-foreground'
+                            isExpanded ? 'rotate-180 text-[#8c6d23]' : 'text-[#05180f]/60'
                           }`}
                         />
                       </div>
@@ -338,28 +342,28 @@ export function Header() {
 
                     {/* Accordion Expandable Content */}
                     {isExpanded && (
-                      <div className="mb-3 space-y-1.5 rounded-xl border border-border/80 bg-secondary/40 p-3 animate-in slide-in-from-top-2 duration-200">
+                      <div className="mb-3 space-y-1.5 rounded-xl border border-[#05180f]/10 bg-white p-3 shadow-xs animate-in slide-in-from-top-2 duration-200">
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
-                          className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider text-accent hover:bg-accent/10 transition-colors"
+                          className="flex items-center justify-between rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#8c6d23] hover:bg-[#8c6d23]/10 transition-colors"
                         >
                           <span>{item.label} Overview</span>
                           <ArrowUpRight size={13} />
                         </Link>
-                        <div className="h-px bg-border/60 my-1" />
+                        <div className="h-px bg-[#05180f]/10 my-1" />
                         {item.children?.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.href}
                             onClick={() => setOpen(false)}
-                            className="flex flex-col rounded-lg px-3 py-2 text-foreground/80 hover:bg-background hover:text-accent transition-colors"
+                            className="flex flex-col rounded-lg px-3 py-2 text-[#05180f]/85 hover:bg-[#faf8f3] hover:text-[#8c6d23] transition-colors"
                           >
                             <span className="text-xs font-medium tracking-wide">
                               {sub.label}
                             </span>
                             {sub.description && (
-                              <span className="text-[10px] text-muted-foreground leading-tight">
+                              <span className="text-[10px] text-[#05180f]/60 leading-tight">
                                 {sub.description}
                               </span>
                             )}
@@ -373,16 +377,16 @@ export function Header() {
             </nav>
 
             {/* Mobile Bottom Quick Actions */}
-            <div className="border-t border-border pt-4 pb-12 flex flex-col gap-4">
+            <div className="border-t border-[#05180f]/10 pt-4 flex flex-col gap-4">
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground shadow-md transition-colors hover:bg-[#072417]"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#0c3120] py-4 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-md transition-colors hover:bg-[#05180f]"
               >
                 <span>Partner with us</span>
-                <ArrowUpRight size={16} className="text-accent" />
+                <ArrowUpRight size={16} className="text-[#c5a059]" />
               </Link>
-              <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
+              <div className="flex items-center justify-between text-xs text-[#05180f]/70 px-1">
                 <span>{company.email}</span>
                 <span>Iringa, Tanzania</span>
               </div>
@@ -457,7 +461,7 @@ export function Footer() {
 
 export function PageFrame({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground">
       <Header />
       {children}
       <Footer />
