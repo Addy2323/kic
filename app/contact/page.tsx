@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, MapPin, ArrowUpRight, CheckCircle2, Building, Handshake } from 'lucide-react'
-import { PageFrame, PageHero } from '@/components/site-shell'
+import { PageFrame, PageHero, WhatsAppIcon } from '@/components/site-shell'
 import { company, pageCopy } from '@/lib/content'
 
 export default function ContactPage() {
@@ -53,6 +53,24 @@ export default function ContactPage() {
               </a>
               <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
                 For official correspondence, RFP submissions, and investor relations.
+              </p>
+            </div>
+
+            <div className="border-t border-border pt-8">
+              <p className="eyebrow text-[#25D366] font-semibold">WhatsApp Direct</p>
+              <a
+                href={company.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-3 text-xl font-bold text-foreground hover:text-[#25D366] transition-colors"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#25D366] text-white shadow-sm">
+                  <WhatsAppIcon className="h-6 w-6 fill-white" />
+                </div>
+                <span>{company.phone}</span>
+              </a>
+              <p className="mt-3 text-xs text-muted-foreground leading-relaxed">
+                Instant contact for inquiries, project discussions, and partnership support.
               </p>
             </div>
 

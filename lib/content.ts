@@ -26,6 +26,9 @@ export const company = {
   tagline: 'Sustainable Investment. Lasting Impact.',
   subtitle: 'Investing in Renewable Energy, Healthcare, Agriculture and Sustainable Infrastructure.',
   email: 'info@kic.co.tz',
+  phone: '+255 755 029 323',
+  whatsapp: '+255 755 029 323',
+  whatsappLink: 'https://wa.me/255755029323',
   location: ['Mufindi District', 'Iringa Region', 'United Republic of Tanzania'],
   founder: {
     name: 'Mendrad Kigola',
