@@ -17,6 +17,7 @@ import {
   UserCheck,
 } from 'lucide-react'
 import { PageFrame, PageHero } from '@/components/site-shell'
+import { LeadershipSection } from '@/components/leadership-section'
 import { company, coreValues, pageCopy } from '@/lib/content'
 
 export const metadata = {
@@ -144,113 +145,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Section 3: Leadership */}
-      <section id="leadership" className="scroll-mt-24 border-b border-border/80 bg-background px-6 py-20 lg:px-10 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="eyebrow text-accent font-semibold">Executive Leadership</p>
-            <h2 className="mt-3 text-3xl font-serif font-medium tracking-tight text-foreground sm:text-4xl">
-              Leadership Driving Sustainable Growth
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Guiding KIC with local insight, disciplined governance, and a long-term development outlook.
-            </p>
-          </div>
-
-          {/* Managing Director Highlight Card */}
-          <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-sm lg:p-10">
-            <div className="grid gap-8 md:grid-cols-[.4fr_1fr] md:items-center">
-              <div className="flex h-36 w-36 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0c3120] to-[#05180f] text-accent text-3xl font-serif font-bold shadow-md">
-                MK
-              </div>
-              <div>
-                <span className="eyebrow text-accent font-semibold">
-                  {company.founder.title}
-                </span>
-                <h3 className="mt-2 text-2xl font-serif font-medium text-foreground sm:text-3xl">
-                  {company.founder.name}
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {company.founder.bio}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4: Organizational Structure */}
-      <section id="team" className="scroll-mt-24 border-b border-border/80 bg-secondary/30 px-6 py-20 lg:px-10 lg:py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="eyebrow text-accent font-semibold">Organization</p>
-            <h2 className="mt-3 text-3xl font-serif font-medium tracking-tight text-foreground sm:text-4xl">
-              KIC Company Group — Organizational Structure
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Our executive leadership and operational management structure driving KIC’s investment and project execution across East Africa.
-            </p>
-          </div>
-
-          {/* Org Chart Cards Grid */}
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {company.team.map((member) => (
-              <div
-                key={member.name}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-xs transition-all hover:border-accent/40 hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/15 font-serif font-bold text-accent">
-                    {member.name
-                      .split(' ')
-                      .map((n) => n[0])
-                      .join('')
-                      .slice(0, 2)}
-                  </div>
-                  <span className="rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold text-accent">
-                    {member.category}
-                  </span>
-                </div>
-                <h3 className="mt-5 font-serif text-xl font-medium text-foreground group-hover:text-accent transition-colors">
-                  {member.name}
-                </h3>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  {member.role}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Table View */}
-          <div className="mt-12 overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
-            <div className="border-b border-border bg-secondary/50 px-6 py-4">
-              <h3 className="font-serif text-lg font-medium text-foreground">
-                KIC Company Group — Executive Directory
-              </h3>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="border-b border-border bg-secondary/20 text-xs uppercase text-muted-foreground">
-                  <tr>
-                    <th className="px-6 py-3 font-semibold">Name</th>
-                    <th className="px-6 py-3 font-semibold">Official Role</th>
-                    <th className="px-6 py-3 font-semibold">Department / Category</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {company.team.map((m) => (
-                    <tr key={m.name} className="hover:bg-secondary/10 transition-colors">
-                      <td className="px-6 py-4 font-medium text-foreground">{m.name}</td>
-                      <td className="px-6 py-4 text-accent font-semibold">{m.role}</td>
-                      <td className="px-6 py-4 text-muted-foreground">{m.category}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Section 3: Leadership & Management */}
+      <LeadershipSection id="leadership" showCta={true} />
 
       {/* Section 5: Core Values (7 Official Principles) */}
       <section id="core-values" className="scroll-mt-24 bg-background px-6 py-20 lg:px-10 lg:py-28">

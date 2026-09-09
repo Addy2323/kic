@@ -54,6 +54,158 @@ export const company = {
   ],
 }
 
+export interface LeadershipMember {
+  id: string
+  name: string
+  title: string
+  isLeadershipBadge?: boolean
+  image: string
+  fallbackImage: string
+  alt: string
+  shortProfile: string
+  fullProfile: string[]
+  credentials?: string[]
+  expertise?: string[]
+}
+
+export const leadershipMembers: LeadershipMember[] = [
+  {
+    id: 'mendrad-lutengano-kigola',
+    name: 'Mendrad Lutengano Kigola',
+    title: 'Founder, Director & Business Leader',
+    isLeadershipBadge: true,
+    image: '/profiles/MENDRAD KIGOLA.jpeg',
+    fallbackImage: '/profiles/mendrad-kigola.jpeg',
+    alt: 'Mendrad Lutengano Kigola - Founder, Director & Business Leader at KIC Company Group',
+    shortProfile:
+      'Mendrad Lutengano Kigola is a Tanzanian business leader, entrepreneur and finance professional with extensive experience in public leadership, investment, entrepreneurship and community development.',
+    fullProfile: [
+      'Mendrad Lutengano Kigola is a Tanzanian business leader, entrepreneur, finance professional and former Member of Parliament with more than a decade of experience in public leadership, financial management, investment, entrepreneurship and community development.',
+      'He holds an MSc in Finance from the University of Strathclyde, Glasgow, United Kingdom, a Postgraduate Diploma from the Institute of Finance Management (IFM), Dar es Salaam, and a Bachelor of Business Administration from Tumaini University, Iringa.',
+      'Kigola served as a Member of Parliament for Mufindi South Constituency from 2010 to 2020, representing Chama Cha Mapinduzi. During his parliamentary career, he advocated for improved electricity supply, water services, roads, healthcare, education, agriculture, youth employment and rural economic development.',
+      'He has been involved in the development of Kigola International Company Limited and its investment initiatives in renewable energy, hydropower, agriculture, livestock, healthcare, education and infrastructure. Key projects associated with his investment activities include the 5 MW Nyalawa Hydropower Project in Mufindi District, Iringa Region.',
+      'His professional strengths include strategic leadership, financial analysis, investment planning, project development, stakeholder engagement, business management and community development. He is committed to using finance, entrepreneurship and strategic investment to create employment, strengthen infrastructure and promote sustainable development in Tanzania.',
+    ],
+    credentials: [
+      'MSc in Finance – University of Strathclyde (Glasgow, UK)',
+      'Postgraduate Diploma – Institute of Finance Management (IFM)',
+      'Bachelor of Business Administration – Tumaini University, Iringa',
+      'Former Member of Parliament – Mufindi South (2010–2020)',
+    ],
+    expertise: [
+      'Strategic Leadership',
+      'Financial Analysis & Investment',
+      'Hydropower & Energy Infrastructure',
+      'Stakeholder & Public Governance',
+    ],
+  },
+  {
+    id: 'irene-mendrad-kigola',
+    name: 'Irene Mendrad Kigola',
+    title: 'Human Resources & Legal Counsel',
+    isLeadershipBadge: false,
+    image: '/profiles/IRENE KIGOLA.jpeg',
+    fallbackImage: '/profiles/irene-kigola.jpeg',
+    alt: 'Irene Mendrad Kigola - Human Resources & Legal Counsel at KIC Company Group',
+    shortProfile:
+      'Irene Mendrad Kigola is a qualified legal professional providing strategic legal, governance and human resource guidance to support KIC’s responsible growth.',
+    fullProfile: [
+      'Irene Mendrad Kigola is a qualified legal professional serving as the Human Resources and Legal Counsel of the Company. She holds an LL.B. (Hons) and an LL.M. (Hons) in Corporate Law, together with professional legal training from the Law School of Tanzania.',
+      'She has expertise in corporate and commercial law, employment and labour law, legal compliance, contract management, corporate governance, dispute resolution and human resource management. In her role, she provides legal and strategic advice to management, oversees employment and HR matters, reviews and prepares contracts and legal documents, supports policy development, and ensures the Company’s operations comply with applicable laws and regulatory requirements.',
+      'With professional experience spanning legal practice, consultancy, public-sector work and higher education, Irene brings legal knowledge, strategic thinking, research, leadership and organisational skills to the Company. She is committed to good corporate governance, employee development, regulatory compliance, effective risk management and sustainable business growth.',
+    ],
+    credentials: [
+      'LL.M. (Hons) in Corporate Law',
+      'LL.B. (Hons) in Law',
+      'Law School of Tanzania Professional Legal Training',
+    ],
+    expertise: [
+      'Corporate & Commercial Law',
+      'Regulatory Compliance & Governance',
+      'Contract Negotiation & Management',
+      'Human Resources Strategy',
+    ],
+  },
+  {
+    id: 'innocent-mendrad-kigola',
+    name: 'Innocent Mendrad Kigola',
+    title: 'Chief Operating Officer & Marketing Director',
+    isLeadershipBadge: false,
+    image: '/profiles/INNOCENT  KIGOLA.jpeg',
+    fallbackImage: '/profiles/innocent-kigola.jpeg',
+    alt: 'Innocent Mendrad Kigola - Chief Operating Officer & Marketing Director at KIC Company Group',
+    shortProfile:
+      'An Aeronautical Engineering graduate, Innocent leads operational coordination, business development and brand growth across KIC’s investment portfolio.',
+    fullProfile: [
+      'Innocent Mendrad Kigola is an Aeronautical Engineering graduate serving as the Chief Operating Officer and Marketing Director of Kigola International Company Limited. In his role, he coordinates the Company’s operations, supports strategic planning, and drives business development and marketing initiatives.',
+      'He oversees day-to-day operational activities, supports the development and implementation of business strategies, coordinates resources and teams, and works to improve the Company’s efficiency and performance. As Marketing Director, he focuses on strengthening the KIC brand, identifying new business opportunities, building relationships with clients and strategic partners, and expanding the Company’s market presence.',
+      'With a background in engineering and a strong interest in business, innovation, technology and strategic management, Innocent brings analytical thinking, problem-solving, leadership and organisational skills to the Company. He is committed to supporting KIC’s growth while promoting professionalism, integrity, innovation and sustainable business development.',
+    ],
+    credentials: [
+      'Degree in Aeronautical Engineering',
+      'Operations & Cross-Functional Management Certification',
+    ],
+    expertise: [
+      'Operational Efficiency',
+      'Business Development',
+      'Brand & Market Expansion',
+      'Engineering Problem-Solving',
+    ],
+  },
+  {
+    id: 'asteberta-longinusi-myamba',
+    name: 'Asteberta Longinusi Myamba',
+    title: 'Chairwoman, KIC Company | Educator',
+    isLeadershipBadge: true,
+    image: '/profiles/ASTEBERTA MYAMBA.jpeg',
+    fallbackImage: '/profiles/asteberta-myamba.jpeg',
+    alt: 'Mrs. Asteberta Longinusi Myamba - Chairwoman at KIC Company and Educator',
+    shortProfile:
+      'Mrs. Asteberta Myamba provides strategic oversight, principled leadership and a strong commitment to institutional development and education.',
+    fullProfile: [
+      'Mrs. Asteberta Myamba is a distinguished professional with a strong background in leadership, management and education. She serves as the Chairwoman of KIC Company, providing strategic oversight and leadership while contributing to the Company’s vision, growth and long-term development.',
+      'Alongside her corporate leadership responsibilities, Mrs. Myamba is also an educator, reflecting her commitment to knowledge development, mentorship and empowering individuals through education. Her experience across both corporate and education sectors brings a valuable combination of leadership, professionalism and a strong commitment to institutional development.',
+      'She is recognised for her dedication, integrity and ability to foster an environment focused on growth, excellence and sustainable development.',
+    ],
+    credentials: [
+      'Distinguished Executive & Educational Leadership',
+      'Institutional Governance & Board Oversight',
+    ],
+    expertise: [
+      'Board Governance & Stewardship',
+      'Institutional Development',
+      'Education & Mentorship Initiatives',
+      'Strategic Oversight',
+    ],
+  },
+  {
+    id: 'ado-myamba',
+    name: 'Ado Myamba',
+    title: 'Information Technology Officer',
+    isLeadershipBadge: false,
+    image: '/profiles/ADO MYAMBA.jpeg',
+    fallbackImage: '/profiles/ado-myamba.jpeg',
+    alt: 'Ado Myamba - Information Technology Officer at KIC Company Group',
+    shortProfile:
+      'Ado Myamba is an IT specialist supporting KIC’s digital systems, web solutions, technology infrastructure and continuous innovation.',
+    fullProfile: [
+      'Ado Myamba is a dedicated Information Technology specialist with a Bachelor’s Degree in Information Technology. He has experience in full-stack web development, database management, server administration and the development of modern digital solutions.',
+      'As Information Technology Officer at KIC Company Group, he supports and manages the Company’s technology systems while contributing to the development and improvement of digital solutions.',
+      'He is passionate about using technology to solve real-world problems and create efficient, reliable and user-friendly systems. His experience spans web technologies, databases, servers and software development tools. He values teamwork, creativity, professionalism and continuous learning, and is committed to supporting KIC’s growth through secure and effective technology solutions.',
+    ],
+    credentials: [
+      'Bachelor’s Degree in Information Technology',
+      'Full-Stack Architecture & Cloud Systems Specialist',
+    ],
+    expertise: [
+      'Digital Systems & Infrastructure',
+      'Full-Stack Development & Database Systems',
+      'Server Administration & Security',
+      'Enterprise Technology Integration',
+    ],
+  },
+]
+
 export const navItems: NavItem[] = [
   {
     label: 'Business Areas',

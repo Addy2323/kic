@@ -9,6 +9,7 @@ import {
   ProcessTimelineSection,
   HorizontalProjectsTrack,
 } from '@/components/horizontal-animations'
+import { LeadershipSection } from '@/components/leadership-section'
 import { sectors } from '@/lib/content'
 
 export default function HomePage() {
@@ -146,6 +147,9 @@ export default function HomePage() {
 
       {/* Flagship Projects Showcase Track */}
       <HorizontalProjectsTrack />
+
+      {/* Leadership & Management Executive Preview */}
+      <LeadershipSection preview={true} showCta={false} id="leadership" />
 
       {/* Bottom CTA Banner */}
       <section className="bg-[#05180f] px-6 py-24 text-white lg:px-10 lg:py-32 border-t border-accent/20">
