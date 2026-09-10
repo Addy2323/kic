@@ -37,12 +37,12 @@ export const company = {
     bio: 'Managing Director and founding leader of Kigola International Company Limited, guiding long-term strategy, community-aligned asset development, and multi-sector investment across Tanzania and East Africa.',
   },
   team: [
-    { name: 'Mendrad Kigola', role: 'Managing Director', category: 'Leadership' },
-    { name: 'Asteberta Myamba', role: 'Chairwoman', category: 'Leadership' },
-    { name: 'Irene Mendrad Kigola', role: 'Company HR Manager, Lawyer', category: 'Legal & HR' },
-    { name: 'Isaac Mendrad Kigola', role: 'Company Accountant', category: 'Finance' },
-    { name: 'Innocent Mendra Kigola', role: 'Company Marketing Manager', category: 'Marketing' },
-    { name: 'Ado Myamba', role: 'Company Information Technology Officer (ICT)', category: 'Technology' },
+    { name: 'Mendrad Lutengano Kigola', role: 'Founder, Director & Business Leader', category: 'Leadership' },
+    { name: 'Irene Mendrad Kigola', role: 'Human Resources & Legal Counsel', category: 'Legal & HR' },
+    { name: 'Innocent Mendrad Kigola', role: 'Chief Operating Officer & Marketing Director', category: 'Marketing' },
+    { name: 'Asteberta Longinusi Myamba', role: 'Chairwoman, KIC Company | Educator', category: 'Leadership' },
+    { name: 'Ado Myamba', role: 'Information Technology Officer', category: 'Technology' },
+    { name: 'Isaac Kigola', role: 'Finance & Accounting', category: 'Finance' },
   ] as TeamMember[],
   roles: [
     'Managing Director',
@@ -74,9 +74,9 @@ export const leadershipMembers: LeadershipMember[] = [
     name: 'Mendrad Lutengano Kigola',
     title: 'Founder, Director & Business Leader',
     isLeadershipBadge: true,
-    image: '/profiles/MENDRAD KIGOLA.jpeg',
-    fallbackImage: '/profiles/mendrad-kigola.jpeg',
-    alt: 'Mendrad Lutengano Kigola - Founder, Director & Business Leader at KIC Company Group',
+    image: '/profiles/mendrad-kigola.jpeg',
+    fallbackImage: '/profiles/MENDRAD KIGOLA.jpeg',
+    alt: 'Mendrad Lutengano Kigola - Founder, Director & Business Leader at Kigola International Company Limited',
     shortProfile:
       'Mendrad Lutengano Kigola is a Tanzanian business leader, entrepreneur and finance professional with extensive experience in public leadership, investment, entrepreneurship and community development.',
     fullProfile: [
@@ -93,36 +93,10 @@ export const leadershipMembers: LeadershipMember[] = [
       'Former Member of Parliament – Mufindi South (2010–2020)',
     ],
     expertise: [
-      'Strategic Leadership',
-      'Financial Analysis & Investment',
-      'Hydropower & Energy Infrastructure',
+      'Strategic Leadership & Governance',
+      'Financial Analysis & Investment Planning',
+      'Hydropower & Infrastructure Development',
       'Stakeholder & Public Governance',
-    ],
-  },
-  {
-    id: 'asteberta-longinusi-myamba',
-    name: 'Asteberta Longinusi Myamba',
-    title: 'Chairwoman, KIC Company | Educator',
-    isLeadershipBadge: true,
-    image: '/profiles/ASTEBERTA MYAMBA.jpeg',
-    fallbackImage: '/profiles/asteberta-myamba.jpeg',
-    alt: 'Mrs. Asteberta Longinusi Myamba - Chairwoman at KIC Company and Educator',
-    shortProfile:
-      'Mrs. Asteberta Myamba provides strategic oversight, principled leadership and a strong commitment to institutional development and education.',
-    fullProfile: [
-      'Mrs. Asteberta Myamba is a distinguished professional with a strong background in leadership, management and education. She serves as the Chairwoman of KIC Company, providing strategic oversight and leadership while contributing to the Company’s vision, growth and long-term development.',
-      'Alongside her corporate leadership responsibilities, Mrs. Myamba is also an educator, reflecting her commitment to knowledge development, mentorship and empowering individuals through education. Her experience across both corporate and education sectors brings a valuable combination of leadership, professionalism and a strong commitment to institutional development.',
-      'She is recognised for her dedication, integrity and ability to foster an environment focused on growth, excellence and sustainable development.',
-    ],
-    credentials: [
-      'Distinguished Executive & Educational Leadership',
-      'Institutional Governance & Board Oversight',
-    ],
-    expertise: [
-      'Board Governance & Stewardship',
-      'Institutional Development',
-      'Education & Mentorship Initiatives',
-      'Strategic Oversight',
     ],
   },
   {
@@ -130,9 +104,9 @@ export const leadershipMembers: LeadershipMember[] = [
     name: 'Irene Mendrad Kigola',
     title: 'Human Resources & Legal Counsel',
     isLeadershipBadge: false,
-    image: '/profiles/IRENE KIGOLA.jpeg',
-    fallbackImage: '/profiles/irene-kigola.jpeg',
-    alt: 'Irene Mendrad Kigola - Human Resources & Legal Counsel at KIC Company Group',
+    image: '/profiles/irene-kigola.jpeg',
+    fallbackImage: '/profiles/IRENE KIGOLA.jpeg',
+    alt: 'Irene Mendrad Kigola - Human Resources & Legal Counsel at Kigola International Company Limited',
     shortProfile:
       'Irene Mendrad Kigola is a qualified legal professional providing strategic legal, governance and human resource guidance to support KIC’s responsible growth.',
     fullProfile: [
@@ -157,9 +131,9 @@ export const leadershipMembers: LeadershipMember[] = [
     name: 'Innocent Mendrad Kigola',
     title: 'Chief Operating Officer & Marketing Director',
     isLeadershipBadge: false,
-    image: '/profiles/INNOCENT  KIGOLA.jpeg',
-    fallbackImage: '/profiles/innocent-kigola.jpeg',
-    alt: 'Innocent Mendrad Kigola - Chief Operating Officer & Marketing Director at KIC Company Group',
+    image: '/profiles/innocent-kigola.jpeg',
+    fallbackImage: '/profiles/INNOCENT  KIGOLA1.jpeg',
+    alt: 'Innocent Mendrad Kigola - Chief Operating Officer & Marketing Director at Kigola International Company Limited',
     shortProfile:
       'An Aeronautical Engineering graduate, Innocent leads operational coordination, business development and brand growth across KIC’s investment portfolio.',
     fullProfile: [
@@ -173,9 +147,35 @@ export const leadershipMembers: LeadershipMember[] = [
     ],
     expertise: [
       'Operational Efficiency',
-      'Business Development',
+      'Business Development & Partnerships',
       'Brand & Market Expansion',
       'Engineering Problem-Solving',
+    ],
+  },
+  {
+    id: 'asteberta-longinusi-myamba',
+    name: 'Asteberta Longinusi Myamba',
+    title: 'Chairwoman, KIC Company | Educator',
+    isLeadershipBadge: true,
+    image: '/profiles/asteberta-myamba.jpeg',
+    fallbackImage: '/profiles/ASTEBERTA MYAMBA.jpeg',
+    alt: 'Mrs. Asteberta Longinusi Myamba - Chairwoman at KIC Company and Educator',
+    shortProfile:
+      'Mrs. Asteberta Myamba provides strategic oversight, principled leadership and a strong commitment to institutional development and education.',
+    fullProfile: [
+      'Mrs. Asteberta Myamba is a distinguished professional with a strong background in leadership, management and education. She serves as the Chairwoman of KIC Company, providing strategic oversight and leadership while contributing to the Company’s vision, growth and long-term development.',
+      'Alongside her corporate leadership responsibilities, Mrs. Myamba is also an educator, reflecting her commitment to knowledge development, mentorship and empowering individuals through education. Her experience across both corporate and education sectors brings a valuable combination of leadership, professionalism and a strong commitment to institutional development.',
+      'She is recognised for her dedication, integrity and ability to foster an environment focused on growth, excellence and sustainable development.',
+    ],
+    credentials: [
+      'Distinguished Executive & Educational Leadership',
+      'Institutional Governance & Board Oversight',
+    ],
+    expertise: [
+      'Board Governance & Stewardship',
+      'Institutional Development',
+      'Education & Mentorship Initiatives',
+      'Strategic Oversight',
     ],
   },
   {
@@ -183,9 +183,9 @@ export const leadershipMembers: LeadershipMember[] = [
     name: 'Ado Myamba',
     title: 'Information Technology Officer',
     isLeadershipBadge: false,
-    image: '/profiles/ADO MYAMBA.jpeg',
-    fallbackImage: '/profiles/ado-myamba.jpeg',
-    alt: 'Ado Myamba - Information Technology Officer at KIC Company Group',
+    image: '/profiles/ado-myamba.jpeg',
+    fallbackImage: '/profiles/ADO MYAMBA.jpeg',
+    alt: 'Ado Myamba - Information Technology Officer at Kigola International Company Limited',
     shortProfile:
       'Ado Myamba is an IT specialist supporting KIC’s digital systems, web solutions, technology infrastructure and continuous innovation.',
     fullProfile: [
@@ -202,6 +202,33 @@ export const leadershipMembers: LeadershipMember[] = [
       'Full-Stack Development & Database Systems',
       'Server Administration & Security',
       'Enterprise Technology Integration',
+    ],
+  },
+  {
+    id: 'isaac-kigola',
+    name: 'Isaac Kigola',
+    title: 'Finance & Accounting',
+    isLeadershipBadge: false,
+    image: '/profiles/isaac-kigola.png',
+    fallbackImage: '/profiles/isaac-kigola (2).png',
+    alt: 'Isaac Kigola - Finance & Accounting at Kigola International Company Limited',
+    shortProfile:
+      'Isaac Kigola supports KIC’s finance and accounting activities through accurate records, sound documentation and a commitment to efficient business operations.',
+    fullProfile: [
+      'Isaac Kigola is a motivated and dedicated professional with a strong interest in finance and accounting, currently associated with Kigola International Company Limited. He is passionate about developing his knowledge and practical capabilities in accounting, financial management and business operations, while contributing positively to the continued growth and success of the organisation.',
+      'In his role at Kigola International Company Limited, Isaac supports accounting and financial activities, maintains accurate financial records, organises financial documentation and assists with day-to-day finance and accounting operations. He is committed to carrying out his responsibilities with accuracy, efficiency and professionalism.',
+      'With interests in finance, accounting, business and professional development, Isaac brings attention to detail, analytical thinking, communication, teamwork and organisational skills to his work. He is eager to continue building his professional capabilities and contribute to Kigola International Company Limited through integrity, commitment, responsibility and continuous learning.',
+    ],
+    credentials: [
+      'Finance & Accounting Operations',
+      'Financial Documentation & Records Management',
+      'Business Administration Support',
+    ],
+    expertise: [
+      'Financial Records Management',
+      'Accounting Operations',
+      'Financial Documentation & Reporting',
+      'Analytical & Organizational Coordination',
     ],
   },
 ]

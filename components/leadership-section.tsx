@@ -169,30 +169,13 @@ export function LeadershipSection({
             )}
           </div>
 
-          {/* Five Profile Cards Grid */}
-          {/* Desktop: 3 cards first row (cols 1-2, 3-4, 5-6), 2 cards centred second row (cols 2-3, 4-5) */}
-          {/* Tablet: 2 columns */}
-          {/* Mobile: 1 column */}
-          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
+          {/* Six Profile Cards Responsive Grid: Desktop 3 cols (3 per row), Tablet 2 cols, Mobile 1 col */}
+          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {leadershipMembers.map((member, index) => {
-              // Exact grid mapping:
-              // Index 0, 1, 2: 1st row (3 cards, each spans 2 of 6 columns)
-              // Index 3: 2nd row, starts at column 2 (occupies cols 2 & 3)
-              // Index 4: 2nd row (occupies cols 4 & 5)
-              // This leaves cols 1 and 6 as equal margins on desktop, perfectly centering the 2 cards!
-              let colClasses = 'lg:col-span-2'
-              if (index === 3) {
-                colClasses =
-                  'sm:col-span-1 lg:col-span-2 lg:col-start-2'
-              } else if (index === 4) {
-                colClasses =
-                  'sm:col-span-2 sm:max-w-md sm:mx-auto lg:max-w-none lg:col-span-2 lg:col-start-auto w-full'
-              }
-
               return (
                 <div
                   key={member.id}
-                  className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/90 bg-card p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl ${colClasses}`}
+                  className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/90 bg-card p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-xl"
                 >
                   <div>
                     {/* Portrait Image in 4:5 Aspect Ratio */}

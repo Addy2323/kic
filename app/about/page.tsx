@@ -146,6 +146,7 @@ export default function AboutPage() {
       </section>
 
       {/* Section 3: Leadership & Management */}
+      <div id="team" className="scroll-mt-24" />
       <LeadershipSection id="leadership" showCta={true} />
 
       {/* Section 5: Core Values (7 Official Principles) */}
