@@ -100,6 +100,32 @@ export const leadershipMembers: LeadershipMember[] = [
     ],
   },
   {
+    id: 'asteberta-longinusi-myamba',
+    name: 'Asteberta Longinusi Myamba',
+    title: 'Chairwoman, KIC Company | Educator',
+    isLeadershipBadge: true,
+    image: '/profiles/asteberta-myamba.jpeg',
+    fallbackImage: '/profiles/ASTEBERTA MYAMBA.jpeg',
+    alt: 'Mrs. Asteberta Longinusi Myamba - Chairwoman at KIC Company and Educator',
+    shortProfile:
+      'Mrs. Asteberta Myamba provides strategic oversight, principled leadership and a strong commitment to institutional development and education.',
+    fullProfile: [
+      'Mrs. Asteberta Myamba is a distinguished professional with a strong background in leadership, management and education. She serves as the Chairwoman of KIC Company, providing strategic oversight and leadership while contributing to the Company’s vision, growth and long-term development.',
+      'Alongside her corporate leadership responsibilities, Mrs. Myamba is also an educator, reflecting her commitment to knowledge development, mentorship and empowering individuals through education. Her experience across both corporate and education sectors brings a valuable combination of leadership, professionalism and a strong commitment to institutional development.',
+      'She is recognised for her dedication, integrity and ability to foster an environment focused on growth, excellence and sustainable development.',
+    ],
+    credentials: [
+      'Distinguished Executive & Educational Leadership',
+      'Institutional Governance & Board Oversight',
+    ],
+    expertise: [
+      'Board Governance & Stewardship',
+      'Institutional Development',
+      'Education & Mentorship Initiatives',
+      'Strategic Oversight',
+    ],
+  },
+  {
     id: 'irene-mendrad-kigola',
     name: 'Irene Mendrad Kigola',
     title: 'Human Resources & Legal Counsel',
@@ -152,32 +178,7 @@ export const leadershipMembers: LeadershipMember[] = [
       'Engineering Problem-Solving',
     ],
   },
-  {
-    id: 'asteberta-longinusi-myamba',
-    name: 'Asteberta Longinusi Myamba',
-    title: 'Chairwoman, KIC Company | Educator',
-    isLeadershipBadge: true,
-    image: '/profiles/asteberta-myamba.jpeg',
-    fallbackImage: '/profiles/ASTEBERTA MYAMBA.jpeg',
-    alt: 'Mrs. Asteberta Longinusi Myamba - Chairwoman at KIC Company and Educator',
-    shortProfile:
-      'Mrs. Asteberta Myamba provides strategic oversight, principled leadership and a strong commitment to institutional development and education.',
-    fullProfile: [
-      'Mrs. Asteberta Myamba is a distinguished professional with a strong background in leadership, management and education. She serves as the Chairwoman of KIC Company, providing strategic oversight and leadership while contributing to the Company’s vision, growth and long-term development.',
-      'Alongside her corporate leadership responsibilities, Mrs. Myamba is also an educator, reflecting her commitment to knowledge development, mentorship and empowering individuals through education. Her experience across both corporate and education sectors brings a valuable combination of leadership, professionalism and a strong commitment to institutional development.',
-      'She is recognised for her dedication, integrity and ability to foster an environment focused on growth, excellence and sustainable development.',
-    ],
-    credentials: [
-      'Distinguished Executive & Educational Leadership',
-      'Institutional Governance & Board Oversight',
-    ],
-    expertise: [
-      'Board Governance & Stewardship',
-      'Institutional Development',
-      'Education & Mentorship Initiatives',
-      'Strategic Oversight',
-    ],
-  },
+
   {
     id: 'ado-myamba',
     name: 'Ado Myamba',
